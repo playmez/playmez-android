@@ -1,7 +1,7 @@
 // Playmez game for Android (Kotlin).
 //
-//   val game = SpinlineGameView(context)
-//   game.onEvent = { e -> Log.d("spinline", "${e.type} ${e.game} ${e.net}") }
+//   val game = PlaymezGameView(context)
+//   game.onEvent = { e -> Log.d("playmez", "${e.type} ${e.game} ${e.net}") }
 //   game.onClose = { finish() }
 //   setContentView(game)
 //   game.open(launchUrl)   // from YOUR backend (POST /partner/launch); never ship the API key
@@ -11,7 +11,7 @@
 // Voice at shared tables: the view grants microphone capture to the game origin and nothing else;
 // declare RECORD_AUDIO in your manifest and ask the user for it. Only needed when Playmez has
 // switched voice on for you; set allowMicrophone = false to refuse it.
-package app.spinline.embed
+package com.playmez.embed
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -27,7 +27,7 @@ import android.webkit.WebViewClient
 import org.json.JSONObject
 
 /** One message from the game: `ready`, `result`, `close`, `error` or `resize`. */
-class SpinlineEvent(val type: String, val json: JSONObject) {
+class PlaymezEvent(val type: String, val json: JSONObject) {
     val game: String? get() = if (json.has("game")) json.optString("game") else null
     val won: Boolean get() = json.optBoolean("won")
     val net: Int get() = json.optInt("net")
@@ -38,7 +38,7 @@ class SpinlineEvent(val type: String, val json: JSONObject) {
     companion object {
         /** Parses one bridge message; null for anything that is not a Playmez event. */
         @JvmStatic
-        fun parse(raw: String): SpinlineEvent? {
+        fun parse(raw: String): PlaymezEvent? {
             val obj = try {
                 JSONObject(raw)
             } catch (_: Exception) {
@@ -47,13 +47,13 @@ class SpinlineEvent(val type: String, val json: JSONObject) {
             if (obj.optString("source") != "spinline") return null
             val type = obj.optString("type")
             if (type.isEmpty()) return null
-            return SpinlineEvent(type, obj)
+            return PlaymezEvent(type, obj)
         }
     }
 }
 
-class SpinlineGameView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs) {
-    var onEvent: ((SpinlineEvent) -> Unit)? = null
+class PlaymezGameView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : WebView(context, attrs) {
+    var onEvent: ((PlaymezEvent) -> Unit)? = null
     /** The player tapped Leave or Close: finish the activity or hide the view. */
     var onClose: (() -> Unit)? = null
     /** Let the game use the microphone for voice at shared tables. */
@@ -79,7 +79,7 @@ class SpinlineGameView @JvmOverloads constructor(context: Context, attrs: Attrib
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean =
                 request.url.host != allowedHost
         }
-        addJavascriptInterface(Bridge(), "SpinlineBridge")
+        addJavascriptInterface(Bridge(), "PlaymezBridge")
     }
 
     init {
@@ -95,7 +95,7 @@ class SpinlineGameView @JvmOverloads constructor(context: Context, attrs: Attrib
     private inner class Bridge {
         @JavascriptInterface
         fun postMessage(json: String) {
-            val event = SpinlineEvent.parse(json) ?: return
+            val event = PlaymezEvent.parse(json) ?: return
             post {
                 onEvent?.invoke(event)
                 if (event.type == "close") onClose?.invoke()

@@ -11,5 +11,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "spinline-embed"
+rootProject.name = "playmez-embed"
 include(":embed")

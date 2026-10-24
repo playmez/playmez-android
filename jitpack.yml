@@ -1,5 +1,5 @@
 # JitPack builds this repository (the public mirror of the Playmez monorepo's sdk/android).
-# Artifact: com.github.anoopKumarChaudhary:spinline-android:<tag>
+# Artifact: com.github.playmez:playmez-android:<tag>
 jdk:
   - openjdk17
 install:

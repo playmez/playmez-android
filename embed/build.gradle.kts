@@ -7,7 +7,7 @@ plugins {
 val sdkVersion: String = project.property("SDK_VERSION") as String
 
 android {
-    namespace = "app.spinline.embed"
+    namespace = "com.playmez.embed"
     compileSdk = 35
     defaultConfig {
         minSdk = 24
@@ -31,7 +31,7 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("release") {
-            groupId = "app.spinline"
+            groupId = "com.playmez"
             artifactId = "embed"
             version = sdkVersion
             afterEvaluate { from(components["release"]) }
@@ -40,7 +40,7 @@ publishing {
                 description.set("Put a Playmez game in your Android app: a WebView that relays the game's events.")
                 url.set("https://playmez.com/developers")
                 licenses { license { name.set("MIT"); url.set("https://opensource.org/licenses/MIT") } }
-                scm { url.set("https://github.com/anoopKumarChaudhary/spinline-android") }
+                scm { url.set("https://github.com/playmez/playmez-android") }
             }
         }
     }

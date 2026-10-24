@@ -10,16 +10,16 @@ From JitPack (no account needed; this repository is the public mirror of the SDK
 // settings.gradle.kts
 dependencyResolutionManagement { repositories { maven("https://jitpack.io") } }
 // build.gradle.kts
-implementation("com.github.anoopKumarChaudhary:spinline-android:1.0.2")
+implementation("com.github.playmez:playmez-android:2.0.0")
 ```
 
 ## Use
 
 ```kotlin
-import app.spinline.embed.SpinlineGameView
+import com.playmez.embed.PlaymezGameView
 
-val game = SpinlineGameView(this)
-game.onEvent = { e -> if (e.type == "result") Log.d("spinline", "won=${e.won} net=${e.net}") }
+val game = PlaymezGameView(this)
+game.onEvent = { e -> if (e.type == "result") Log.d("playmez", "won=${e.won} net=${e.net}") }
 game.onClose = { finish() }
 setContentView(game)
 game.open(launchUrl) // from YOUR backend (POST /partner/launch); never ship the API key
