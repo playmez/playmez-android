@@ -1,4 +1,4 @@
-// Spinline game for Android (Kotlin).
+// Playmez game for Android (Kotlin).
 //
 //   val game = SpinlineGameView(context)
 //   game.onEvent = { e -> Log.d("spinline", "${e.type} ${e.game} ${e.net}") }
@@ -9,7 +9,7 @@
 // The library manifest declares android.permission.INTERNET for you.
 //
 // Voice at shared tables: the view grants microphone capture to the game origin and nothing else;
-// declare RECORD_AUDIO in your manifest and ask the user for it. Only needed when Spinline has
+// declare RECORD_AUDIO in your manifest and ask the user for it. Only needed when Playmez has
 // switched voice on for you; set allowMicrophone = false to refuse it.
 package app.spinline.embed
 
@@ -36,7 +36,7 @@ class SpinlineEvent(val type: String, val json: JSONObject) {
     val height: Int get() = json.optInt("height")
 
     companion object {
-        /** Parses one bridge message; null for anything that is not a Spinline event. */
+        /** Parses one bridge message; null for anything that is not a Playmez event. */
         @JvmStatic
         fun parse(raw: String): SpinlineEvent? {
             val obj = try {
@@ -74,7 +74,7 @@ class SpinlineGameView @JvmOverloads constructor(context: Context, attrs: Attrib
                 if (wantsMic && fromGame && allowMicrophone) request.grant(arrayOf(PermissionRequest.RESOURCE_AUDIO_CAPTURE)) else request.deny()
             }
         }
-        // Keep the view on Spinline: the bridge below is reachable by any page this view loads.
+        // Keep the view on Playmez: the bridge below is reachable by any page this view loads.
         webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean =
                 request.url.host != allowedHost

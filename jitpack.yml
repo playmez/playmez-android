@@ -1,4 +1,4 @@
-# JitPack builds this repository (the public mirror of the Spinline monorepo's sdk/android).
+# JitPack builds this repository (the public mirror of the Playmez monorepo's sdk/android).
 # Artifact: com.github.anoopKumarChaudhary:spinline-android:<tag>
 jdk:
   - openjdk17

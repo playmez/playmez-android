@@ -1,6 +1,6 @@
-# Spinline Embed for Android
+# Playmez Embed for Android
 
-Put a [Spinline](https://playmez.com) game in your Android app. A `WebView` subclass that loads a launch URL and relays the game's events. Points are virtual, non-transferable and worth nothing.
+Put a [Playmez](https://playmez.com) game in your Android app. A `WebView` subclass that loads a launch URL and relays the game's events. Points are virtual, non-transferable and worth nothing.
 
 ## Install
 
@@ -27,8 +27,8 @@ game.open(launchUrl) // from YOUR backend (POST /partner/launch); never ship the
 
 Events: `ready` (`game`), `result` (`game`, `won`, `net`), `close`, `error` (`code`, `message`), `resize` (`height`). `INTERNET` is declared by the library manifest.
 
-Voice at shared tables (only when Spinline switched it on for you): the view grants microphone capture to the game origin; declare and request `RECORD_AUDIO`, or set `allowMicrophone = false`.
+Voice at shared tables (only when Playmez switched it on for you): the view grants microphone capture to the game origin; declare and request `RECORD_AUDIO`, or set `allowMicrophone = false`.
 
 Full guide: https://playmez.com/developers
 
-MIT © Spinline
+MIT © Playmez

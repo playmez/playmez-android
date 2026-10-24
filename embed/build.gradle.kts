@@ -36,8 +36,8 @@ publishing {
             version = sdkVersion
             afterEvaluate { from(components["release"]) }
             pom {
-                name.set("Spinline Embed")
-                description.set("Put a Spinline game in your Android app: a WebView that relays the game's events.")
+                name.set("Playmez Embed")
+                description.set("Put a Playmez game in your Android app: a WebView that relays the game's events.")
                 url.set("https://playmez.com/developers")
                 licenses { license { name.set("MIT"); url.set("https://opensource.org/licenses/MIT") } }
                 scm { url.set("https://github.com/anoopKumarChaudhary/spinline-android") }
