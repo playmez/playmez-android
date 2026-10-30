@@ -26,7 +26,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import org.json.JSONObject
 
-/** One message from the game: `ready`, `result`, `close`, `error` or `resize`. */
+/** One message from the game: `ready`, `result`, `close`, `error`, `resize` or `local_finished`. */
 class PlaymezEvent(val type: String, val json: JSONObject) {
     val game: String? get() = if (json.has("game")) json.optString("game") else null
     val won: Boolean get() = json.optBoolean("won")
@@ -34,6 +34,10 @@ class PlaymezEvent(val type: String, val json: JSONObject) {
     val code: String? get() = if (json.has("code")) json.optString("code") else null
     val message: String? get() = if (json.has("message")) json.optString("message") else null
     val height: Int get() = json.optInt("height")
+    /** Whether a local game ended in a draw (`local_finished` events). */
+    val draw: Boolean get() = json.optBoolean("draw")
+    /** The player's result against the computer (`local_finished`); null for people together or a game of chance. */
+    val wonVsComputer: Boolean? get() = if (json.has("won") && !json.isNull("won")) json.optBoolean("won") else null
 
     companion object {
         /** Parses one bridge message; null for anything that is not a Playmez event. */

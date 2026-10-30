@@ -28,4 +28,15 @@ class PlaymezEventTest {
         assertEquals("LAUNCH_USED", e.code)
         assertEquals("used", e.message)
     }
+
+    @Test
+    fun exposesLocalFinish() {
+        val e = PlaymezEvent.parse("""{"source":"spinline","type":"local_finished","game":"chess","draw":false,"won":true}""")!!
+        assertEquals("local_finished", e.type)
+        assertEquals("chess", e.game)
+        assertEquals(true, e.wonVsComputer)
+        val together = PlaymezEvent.parse("""{"source":"spinline","type":"local_finished","game":"ludo","draw":true,"won":null}""")!!
+        assertTrue(together.draw)
+        assertNull(together.wonVsComputer)
+    }
 }
