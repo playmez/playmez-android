@@ -10,7 +10,7 @@ From JitPack (no account needed; this repository is the public mirror of the SDK
 // settings.gradle.kts
 dependencyResolutionManagement { repositories { maven("https://jitpack.io") } }
 // build.gradle.kts
-implementation("com.github.playmez:playmez-android:2.0.0")
+implementation("com.github.playmez:playmez-android:2.2.0")
 ```
 
 ## Use
