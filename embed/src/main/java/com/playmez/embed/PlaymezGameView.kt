@@ -38,6 +38,12 @@ class PlaymezEvent(val type: String, val json: JSONObject) {
     val draw: Boolean get() = json.optBoolean("draw")
     /** The player's result against the computer (`local_finished`); null for people together or a game of chance. */
     val wonVsComputer: Boolean? get() = if (json.has("won") && !json.isNull("won")) json.optBoolean("won") else null
+    /** The show's kind, such as `quiz` (`ready` of a show launch, where `game` is `show`). */
+    val show: String? get() = if (json.has("show")) json.optString("show") else null
+    /** The show's code (`ready` of a show launch). */
+    val showCode: String? get() = if (json.has("showCode")) json.optString("showCode") else null
+    /** `host` or `player` (`ready` of a show launch). */
+    val role: String? get() = if (json.has("role")) json.optString("role") else null
 
     companion object {
         /** Parses one bridge message; null for anything that is not a Playmez event. */
